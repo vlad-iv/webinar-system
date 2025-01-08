@@ -1,0 +1,57 @@
+spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/webinar
+    username: postgres
+    password: changeme
+  jpa:
+    defer-datasource-initialization: true
+    properties:
+      hibernate:
+        jdbc.time_zone: UTC
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
+        alphanumeric-ids:
+          enabled: true
+
+server:
+  port: 8080
+
+management:
+  health:
+    circuitbreakers:
+      enabled: true
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        registerHealthIndicator: true
+#    instances:
+#      InventoryClientrestoreProductsList:
+#        sliding-window-type: COUNT_BASED
+#        failure-rate-threshold: 50
+#        minimum-number-of-calls: 5
+#        automatic-transition-from-open-to-half-open-enabled: true
+#        wait-duration-in-open-state: 5s
+#        permitted-number-of-calls-in-half-open-state: 3
+#        sliding-window-size: 10
+#        register-health-indicator: true
+
+springdoc:
+  api-docs:
+    path: /docs
+  swagger-ui:
+    path: /docs/index.html
+    display-request-duration: true
+    groups-order: DESC
+    operationsSorter: method
+    disable-swagger-default-url: true
+    group-configs:
+      - group: api
+        paths-to-match: /api/v1/**
