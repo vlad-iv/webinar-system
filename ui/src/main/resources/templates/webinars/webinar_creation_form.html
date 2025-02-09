@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Создать вебинар</title>
+</head>
+<body>
+    <h1>Создать вебинар</h1>
+    <form action="/webinars" method="post">
+        <label>Название:</label>
+        <input type="text" name="name" />
+        <label>Описание:</label>
+        <input type="text" name="description" />
+        <label>Дата:</label>
+        <input type="text" name="date" />
+        <label>ID лектора:</label>
+        <input type="number" name="lectorId" />
+        <button type="submit">Создать</button>
+    </form>
+</body>
+</html>

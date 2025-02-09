@@ -2,8 +2,6 @@ package ru.ivanovvl.dto;
 
 import java.time.Instant;
 
-import ru.ivanovvl.model.User;
-
 /**
  * Webinar .
  *

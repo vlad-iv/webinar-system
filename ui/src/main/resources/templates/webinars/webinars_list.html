@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Список вебинаров</title>
+</head>
+<body>
+    <h1>Список вебинаров</h1>
+    <a href="/webinars/create">Создать новый вебинар</a>
+    <ul>
+        <li th:each="webinar : ${webinars}">
+            <span th:text="${webinar.name}"></span>
+            <a th:href="'/webinars/' + ${webinar.id}">Подробнее</a>
+            <a th:href="'/webinars/' + ${webinar.id} + '/edit'">Редактировать</a>
+            <a th:href="'/webinars/' + ${webinar.id} + '/delete'">Удалить</a>
+        </li>
+    </ul>
+</body>
+</html>

@@ -28,7 +28,6 @@ public interface WebinarOperations {
 	@GetMapping
 	List<WebinarDto> getAllWebinars();
 
-	@GetMapping("/{webinarId}")
 	WebinarDto getWebinarById(@PathVariable Integer webinarId);
 
 	@PutMapping("/{webinarId}")
@@ -37,6 +36,6 @@ public interface WebinarOperations {
 			@RequestBody WebinarUpdateDto webinarUpdateDto);
 
 	@DeleteMapping("/{webinarId}")
-			@ResponseStatus(HttpStatus.NO_CONTENT)
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	void deleteWebinar(@PathVariable Integer webinarId);
 }

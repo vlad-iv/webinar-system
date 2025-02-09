@@ -1,15 +1,19 @@
 package ru.ivanovvl.controller;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import ru.ivanovvl.dto.WebinarCreateDto;
 import ru.ivanovvl.dto.WebinarDto;
 import ru.ivanovvl.dto.WebinarUpdateDto;
+import ru.ivanovvl.operations.WebinarOperations;
 import ru.ivanovvl.service.WebinarService;
-
-import java.util.List;
 
 /**
  * REST Controller для работы с вебинарами.
@@ -19,7 +23,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/v1/webinars")
-public class WebinarController {
+public class WebinarController implements WebinarOperations {
 
 	private final WebinarService webinarService;
 
@@ -33,8 +37,7 @@ public class WebinarController {
 	 * @param webinarCreateDto DTO с деталями вебинара.
 	 * @return DTO созданного вебинара.
 	 */
-	@PostMapping
-	@ResponseStatus(HttpStatus.CREATED)
+	@Override
 	public WebinarDto createWebinar(@RequestBody  @Valid WebinarCreateDto webinarCreateDto) {
 		return webinarService.createWebinar(webinarCreateDto);
 	}
@@ -44,7 +47,7 @@ public class WebinarController {
 	 *
 	 * @return Список DTO вебинаров.
 	 */
-	@GetMapping
+	@Override
 	public List<WebinarDto> getAllWebinars() {
 		return webinarService.getAllWebinars();
 	}
@@ -55,6 +58,7 @@ public class WebinarController {
 	 * @param webinarId ID вебинара.
 	 * @return DTO найденного вебинара.
 	 */
+	@Override
 	@GetMapping("/{webinarId}")
 	public WebinarDto getWebinarById(@PathVariable Integer webinarId) {
 		return webinarService.getWebinarById(webinarId);
@@ -67,7 +71,7 @@ public class WebinarController {
 	 * @param webinarUpdateDto DTO с обновленными данными вебинара.
 	 * @return DTO обновленного вебинара.
 	 */
-	@PutMapping("/{webinarId}")
+	@Override
 	public WebinarDto updateWebinar(@PathVariable Integer webinarId,
 			@RequestBody @Valid WebinarUpdateDto webinarUpdateDto) {
 		return webinarService.updateWebinar(webinarId, webinarUpdateDto);
@@ -78,8 +82,7 @@ public class WebinarController {
 	 *
 	 * @param webinarId ID вебинара.
 	 */
-	@DeleteMapping("/{webinarId}")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@Override
 	public void deleteWebinar(@PathVariable Integer webinarId) {
 		webinarService.deleteWebinar(webinarId);
 	}
